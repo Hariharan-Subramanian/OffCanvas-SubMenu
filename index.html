@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="underscore.js"></script>
+    <style>
+    body {
+        overflow-x: hidden;
+      
+    }
+   /* #menu .arrow-indicator:before {
+        content: " ";
+        float: right;
+        margin-right: 0px;
+        border-bottom: 6px solid transparent;
+        border-top: 6px solid transparent;
+        border-left: 6px solid #888;
+        border-right: 6px solid transparent;
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+    #menu .list-group li {
+        padding: 10px 5px 10px 20px;
+    }
+    #menu {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        right: -100%;
+        transition: right .2s;
+        overflow-x: hidden;
+        top:60px;
+    }
+    #menu ul {
+        position: absolute;
+        width: 100%;
+        transition: right .3s;
+        padding-left: 3px;
+        padding-right: 2px;
+    }*/
+    .main {
+        right: 0%;
+    }
+    .backSection{
+        height: 52px;
+        position:relative;
+        display: none;
+    }
+    .hm-header {
+        /*display: none;*/
+        background-color: #ccc;
+        height : 60px;
+        padding:7px 10px 10px 0;
+        position:fixed;
+        z-index:1000;
+        width: 100%;
+    }
+    .hm-header .menu-close {
+        z-index: 10;
+        position: relative;
+        /* right: 20px; */
+        color: #000;
+        background: #fff;
+    }
+    .backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        bottom: 0;
+        background: #000;
+        opacity: 0.7;
+    }
+    .mid-container {
+        padding: 0;
+    }
+    .hm-header .mob-logo {
+        background-color: #1C1919;
+        width: 30%;
+        float: left;
+        color: #fff;
+        text-align: center;
+        padding: 8px 0;
+    }
+    .mob-profile span,.mob-menu span {
+        display: block;
+    }
+    .hm-header .mob-profile,.hm-header .mob-menu {
+        width: 60px;
+        font-size: 10px;
+        border: 2px solid;
+        border-color: #7F7E7E;
+        border-radius: 2px;
+        float: right;
+        text-align: center;
+    }
+    .hm-header .mob-profile{
+        margin-right: 10px;
+    }
+    .hm-header i.fa {
+        font-size: 22px;
+        margin-top: 4px;
+        color: #333
+    }
+    #menu .arrow-indicator:before {
+        content: " ";
+        float: right;
+        margin-right: 0px;
+        border-bottom: 6px solid transparent;
+        border-top: 6px solid transparent;
+        border-left: 6px solid #888;
+        border-right: 6px solid transparent;
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+    #menu .list-group li {
+        padding: 10px 5px 10px 20px;
+    }
+    #menu {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+       right: -100%;
+        transition: right .2s;
+        top: 60px;
+        z-index: 1; 
+    }
+    #menu ul {
+        position: absolute;
+        width: 100%;
+        transition: right .3s;
+        top:64px;
+    }
+    #menu ul a{
+        color: #000;
+        font-size: 14px;
+    }
+    #menu ul ul {
+        position: absolute;
+        width: 101%;
+        transition: right .3s;
+        top:64px;
+    } 
+    .main {
+        right: 0%;
+    }
+    .backSection{
+        height: 52px;
+        position:relative;
+        display: none;
+        
+        background: #fff;
+        border-top: 1px solid #ccc;
+    }
+    #menuback  {
+        padding: 5px 10px;
+    }
+    #menuback i.fa {
+        font-size: 15px
+    }
+
+    #menuback span {
+        display: block;
+    }
+    .list-group-item:first-child,.list-group-item:last-child,.form-control,.btn{
+        border-radius: 0 !important
+    }
+    #searchbox {
+        padding: 15px;
+        background: #fff;
+    }
+    #searchbox input{
+        height: 36px;
+        width: 92%;        
+    }
+    #searchbox .btn {
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(19,19,19,1)), color-stop(17%, rgba(19,19,19,1)), color-stop(39%, rgba(19,19,19,1)), color-stop(47%, rgba(19,19,19,1)), color-stop(49%, rgba(34,34,34,1)), color-stop(57%, rgba(0,0,0,1)), color-stop(60%, rgba(17,17,17,1)), color-stop(76%, rgba(19,19,19,1)), color-stop(80%, rgba(19,19,19,1)), color-stop(100%, rgba(19,19,19,1)));
+        background: -webkit-linear-gradient(top, rgba(19,19,19,1) 0%, rgba(19,19,19,1) 17%, rgba(19,19,19,1) 39%, rgba(19,19,19,1) 47%, rgba(34,34,34,1) 49%, rgba(0,0,0,1) 57%, rgba(17,17,17,1) 60%, rgba(19,19,19,1) 76%, rgba(19,19,19,1) 80%, rgba(19,19,19,1) 100%);
+    }
+    #searchbox .btn span {
+        color: #fff;
+    }
+    .back {
+        float: left;
+        width: 50px;
+        border-right: 1px solid #ccc;
+    }
+    .menu-title {
+        float: left;
+        width:80%;
+        padding: 5px 10px;
+        text-align: center;
+    }
+    .menu-title a {
+        font-size: 14px;
+        font-weight: bold;
+        color: #000;
+        line-height: 3.5;
+    }
+    .backSection .btn {
+        border: none;
+        background: transparent;
+    }
+    .backSection .btn.active,.backSection .btn:active{
+        box-shadow: none;
+    }
+    .navbar-toggle{
+      display:block !important;
+    }
+    .hm-header .mob-logo {
+        background-color: transparent;
+        padding: 2px 0;
+        width:122px;
+    }
+    .mob-logo a>img {
+        width: 100%;
+        transform: rotate(3deg);
+    }
+    .mob-profile a{color: #333;}
+    .mob-profile label{
+        margin-bottom:0px;
+    }
+     .mobile-ddctr .fa{float:right;}
+      #searchbox{
+        width: 100%;
+    }
+    #searchbox form{
+        width: 90%;
+    }
+    #searchbox  .input-group-btn{
+        float:right;
+        width:20px;
+    }
+    .container-fluid{
+      padding: 0px;
+    }
+    @font-face {
+      font-family: 'FontAwesome';
+      src: url('assets/fonts/fontawesome-webfont.eot?v=3.0.1');
+      src: url('assets/fonts/fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'),
+        url('assets/fonts/fontawesome-webfont.woff?v=3.0.1') format('woff'),
+        url('assets/fonts/fontawesome-webfont.ttf?v=3.0.1') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    </style>
+</head>
+
+<body>
+   <div class="container-fluid">
+   <div class="hm-header">
+   <div class="mob-logo"><a href="javascript:void(0)">Logo</a></div>
+  <div class="mob-menu" id="menuforward"><i class="fa fa-bars"></i><span>Menu</span></div>
+  <div class="mob-profile"><i class="fa fa-user"></i>
+      <label><a data-target="#myProfile" data-toggle="modal" data-backdrop="static" hm-call="openModalNewsOverlay" hm-url="/home/users/T/Tih1s4t37RafImut1u5W/profile.form.html/content/hmi/en/core/user/my-profile.html" href="javascript:void(0)" hm-link="myProfile" class="currActiveEml">My Profile</a></label>
+  </div>
+   <div id="menu">
+   <div id="searchbox" class="input-group">
+      <input type="text" class="form-control" placeholder="Search">
+      <div class="input-group-btn"><button class="btn btn-default" type="button"> <span class="fa fa-search"></span></button></div>
+   </div>
+   <div class="backSection">
+      <div class="back">
+         <div class="input-group-btn">
+            <div id="menuback" class="btn"><i class="fa fa-arrow-circle-left"></i><span class="">Back</span></div>
+         </div>
+      </div>
+      <div class="menu-title"><a href="../">Title</a></div>
+   </div>
+   <ul class="list-group main" id="mainMenu"style="right: 0%;"></ul>
+</div>
+</div>
+   <!--
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" id="menuforward"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
+                <button type="button" class="navbar-toggle btn btn-default btn-sm close-icon">
+                    <span class="glyphicon glyphicon-remove"></span> Remove
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div id="menu">
+        <div id="searchbox" class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="button"> <span class="fa fa-search"></span></button>
+            </div>
+        </div>
+        <div class="backSection">
+            <div class="back">
+                <div class="input-group-btn">
+                    <div id="menuback" class="btn"><i class="fa fa-arrow-circle-left"></i><span class="">Back</span></div>
+                </div>
+            </div>
+            <div class="menu-title"><a href="../">Title</a></div>
+        </div>
+        <ul class="list-group main">
+        </ul>
+    </div>-->
+</div>
+
+   <script id="menuItem" type="text/template">
+         {% var classindicator=''; var linkeditor=''; var childlevel=1; %}
+       
+         {% _.each(data, function(item) { %}
+           {% if(item.name) { %}
+            {% if(item.childNode) { %}
+                {%     classindicator='arrow-indicator'; %}
+                {% linkeditor=item.name; %}
+            {%     }else{ %}
+                  {%   classindicator=''; %}
+                  {%  linkeditor="<a href='"+item.path+"'>"+item.name+"</a>" %}
+
+              {%   }%}
+              {% var uniqID=item.name.replace(' ',''); %}
+            <li class="list-group-item {{classindicator}}" childlevel="{{childlevel}}" data-href="{{item.path}}" data-id="{{uniqID}}"> {{linkeditor}}
+               {%var a= Label.getHTML({ value : item,childLevel:(childlevel+1)}) %}
+               {{a}}
+                 
+            </li>
+              {%   }%}
+        {% }); %}
+      
+    </script>
+    <script id="submenuItem" type="text/template">
+        {% var childlevel=childLevel; %}
+
+        {% if(item.childNode && item.childNode.length>0) { %} 
+            <ul class="list-group" style="display:none;right:-100%;" prev="{{item.name}}">
+                            {% _.each(item.childNode, function(subitem) { %}
+                              {% var classindicator=''; var linkeditor=''; %}
+                                    {% if(subitem.name) { %}
+                                    {% if(subitem.childNode) { %}
+                                         {% if(subitem.childNode.length>0) { %}
+                                              {%     classindicator='arrow-indicator'; %}
+                                         {%  } %}
+                                         {% linkeditor=subitem.name; %}
+                                    {%  }else{ %}
+                                          {%   classindicator=''; %}
+                                          {%  linkeditor="<a href='"+subitem.path+"'>"+subitem.name+"</a>" %}
+                                    {%  }%}
+                                     {% var uniqID=subitem.name.replace(' ',''); %}
+                                    <li class="list-group-item {{classindicator}}"  childlevel="{{childlevel}}" data-href="{{subitem.path}}" data-id="{{uniqID}}"> {{linkeditor}}
+                                          {% var a= Label.getHTML({ value : subitem,childLevel:(childlevel+1)}) %}
+                                          {{a}}
+                                     </li>
+                                      {%  }%}
+                            {% }); %} 
+                      </ul>
+                 {% }else{ %}
+
+                 {% }%}
+    </script>
+
+    <script>
+     var Label = new function() {
+          var template = $('#submenuItem').html();
+          this.getHTML = function(data) {
+          var renderedList=_.template(template, {'item':data.value,'childLevel':data.childLevel});
+          return renderedList;
+        };
+      }
+    $(document).ready(function() {
+         _.templateSettings = {
+            evaluate: /\{\%(.+?)\%\}/g,
+            interpolate: /\{\{(.+?)\}\}/g
+        };
+        $('#menuforward').on('click', function() {
+            if($(this).find('i').hasClass('fa-bars')){
+            $('#menu').css('display', 'block');     
+            $('body').css('overflow-y', 'hidden');        
+            var timeoutTimer=setTimeout(function(){
+                    $('#menu').css('right', '0%')
+                    $('.mob-menu').css({
+                        'background-color':'#fff',
+                        'zIndex' : 10,
+                        'position' : 'relative'
+                    });
+                    $('.mob-menu span').text('Close menu');
+                    if(currentlevel>=1){
+                        var cssright= currentlevel*100+'%';
+                        $('#mainMenu').css('right', cssright); 
+                        if(initialLoad===false){
+                            setParentPosition(visibleObject);
+                            if(parseInt(visibleObject.children('ul').css('top'))>=0){
+                                visibleObject.children('ul').css('top',-1*(visibleObject.children('ul').offset().top-($('#mainMenu').offset().top+68+50))+'px');
+                            }
+                            initialLoad=true;
+                        }
+                    }else{
+                        visibleObject=$('#menu');
+                        $('#mainMenu').height(window.innerHeight-$('#mainMenu').offset().top).css('overflow-y','scroll');
+                    }
+                    $('body').append('<div class="backdrop"></div>');
+                    $('li [childlevel="2"]').parent('ul').css('right','-100.4%')
+                    clearTimeout(timeoutTimer)
+                },50);
+               $(this).find('i').removeClass('fa-bars').addClass('fa-close menu-close');
+         }else{
+            $('body').css('overflow-y', 'auto');        
+            $('#menu').css('right', '0%')
+            $(this).find('i').removeClass('fa-close menu-close').addClass('fa-bars');
+            $('.mob-menu').css({
+                'background-color':'transparent'
+            });
+            $('.mob-menu span').text('Menu');
+            if(currentlevel>=1){
+                var cssright= currentlevel*100+'%';
+                $('#mainMenu').css('right', cssright); 
+            }else{
+                visibleObject=$('#menu');
+            }
+            $('body').find('.backdrop').remove();
+            $('#menu').css('right' , '-100%');
+            var timeoutTimer=setTimeout(function(){
+                $('#menu').css('display', 'none');
+                clearTimeout(timeoutTimer)
+            },50);
+         }
+    });
+
+     $('#menuback').on('click', function() {
+            backwardSlide($('#mainMenu'))
+    });
+        
+         var visibleObject,currentlevel;
+   
+    var initialLoad=false;
+    function getCookieData(){
+        var storeOBj=document.cookie.split(','); 
+        currentlevel=parseInt(storeOBj[0].replace('value=',''));
+        if(currentlevel==undefined){
+            currentlevel=0;
+        }else if(currentlevel>0){
+            visibleObject=$("li[data-id='"+storeOBj[1]+"']");
+            // visibleObject=$('#mainMenu').find("li:contains('"+storeOBj[1]+"')")
+           initialReload();  
+        }   
+    }
+    function initialReload(){
+        $('.backSection').css('display', 'block');
+        if(!visibleObject.is(":visible")){
+            visibleObject.parent().css('display','block');
+        }
+        visibleObject.children('ul').css('display', 'block');
+        $('.backSection').find('a').text(visibleObject.clone().children().remove().end().text()).attr('href',visibleObject.attr('data-href'));
+    } 
+    window.onbeforeunload = function (e) {
+        var e = e || window.event;
+        currentlevel=parseInt(visibleObject.attr('childlevel'));
+        if(currentlevel>0){
+         document.cookie='value='+currentlevel+','+visibleObject.attr('data-id')+', ';
+        }else{
+          document.cookie='value='+currentlevel;
+        }
+    };
+    jQuery.fn.reverse = function() {
+        return this.pushStack(this.get().reverse(), arguments);
+    };
+    function setParentPosition(curObj){
+        var obj=curObj.parents('ul').not('#mainMenu').reverse();
+        $.each(obj,function(key,elem){
+            if(parseInt(visibleObject.children('ul').css('top'))>=0){
+                $(elem).css('display','block').css('top',-1*($(elem).offset().top-($('#mainMenu').offset().top+68+50))+'px');
+            }   
+        });
+       
+    }
+        /*$.getJSON('menu.json', function(data) {
+          var data= JSON.parse(data[0]);
+            renderList(data.navigation, '.main');
+            $('#menu').find('li').on('click', function(e) {
+                forwradSlide($(this))
+                e.stopPropagation();
+            });
+        });*/
+
+        $.ajax({
+            dataType: "json",
+            url: "menu.json",
+            mimeType: "application/json",
+            success: function(data){
+            renderList(data[0].navigation, '.main');
+            $('#menu').find('li').on('click', function(e) {
+                forwradSlide($(this))
+                e.stopPropagation();
+            });
+            }
+        });
+
+        var visibleObject,currentlevel=0;
+        function backwardSlide($this) {
+             currentlevel=parseInt(visibleObject.attr('childlevel'));
+             if(currentlevel>1){
+                 visibleObject.children('ul').css('overflow-y','inherit');
+                 var main =$('#mainMenu');
+                 var cssright= (currentlevel-1)*100+'%';
+                 main.css('right', cssright);
+                 visibleObject.children('ul').css('display','none');
+                 visibleObject=visibleObject.parent().parent();
+                 currentlevel=parseInt(visibleObject.attr('childlevel'));
+                 console.log(visibleObject,visibleObject.children('ul').css('overflow-y'),visibleObject.children('ul'));
+                if(visibleObject.children('ul').css('overflow-y')=='visible'){
+                    visibleObject.children('ul').css('overflow-y','scroll');
+                }
+             }else{
+                $('.backSection').css('display','none');
+                var main =$('#mainMenu');
+                 var cssright= (currentlevel-1)*100+'%';
+                 main.css('right', cssright);
+                 console.log(visibleObject.attr('childlevel'));
+                 visibleObject.children('ul').removeAttr('style').css({
+                        'display': 'none',
+                        'right': '-100.4%'
+                });
+                
+                visibleObject=visibleObject.parent().parent();
+                currentlevel=0;
+                $('#mainMenu').height(window.innerHeight-$('#mainMenu').offset().top).css('overflow-y','scroll');
+              }
+             $('.backSection').find('a').text(visibleObject.clone().children().remove().end().text()).attr('href',visibleObject.attr('data-href'));
+        }
+
+         function forwradSlide($this) {
+            if($this.hasClass('arrow-indicator')){
+                visibleObject=$this;
+                visibleObject.parent().css('overflow-y','inherit');
+                $('.backSection').css('display','block');
+                var main =$('#mainMenu');
+                visibleObject.children('ul').css('display','block');
+                if(parseInt(visibleObject.children('ul').css('top'))>=0){
+                  visibleObject.children('ul').css('top',-1*(visibleObject.children('ul').offset().top-($('#mainMenu').offset().top+68+50))+'px');
+                }
+
+                if(visibleObject.children('ul').height()>window.innerHeight-$('#mainMenu').offset().top){
+                    visibleObject.children('ul').height(window.innerHeight-$('#mainMenu').offset().top).css('overflow-y','scroll');
+                }
+                currentlevel=parseInt(visibleObject.attr('childlevel'));
+                var cssright= currentlevel*100+'%';
+                main.css('right', cssright);
+                $('.backSection').find('a').text(visibleObject.clone().children().remove().end().text()).attr('href',visibleObject.attr('data-href')); 
+             }  
+        }
+
+        function renderList(data, container) {
+            /* Pushing seat label template in to HTML */
+            var demoTemplate = _.template($('#menuItem').html());
+            var newhtml = demoTemplate({
+                "data": data
+            });
+            $(container).html(newhtml);
+            getCookieData();
+        }
+    });
+    </script>
+</body>
+
+</html>
